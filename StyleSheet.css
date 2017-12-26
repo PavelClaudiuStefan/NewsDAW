@@ -1,0 +1,153 @@
+﻿/****************************** Everything ******************************/
+* {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+body{
+    margin:0px;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+header li {
+    float: left;
+}
+
+header #search, header #search_button {
+    display:block;
+    height:inherit;
+    margin: auto;
+    float: right;
+}
+
+header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+header li a:hover:not(.active) {
+    background-color: #111;
+}
+
+header .active {
+    background-color: #4CAF50;
+}
+
+.content {
+    width:960px;
+    margin: 70px auto;
+}
+
+
+/****************************** Category page style ******************************/
+.category_name {
+    text-align:center;
+    display:block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.article {
+    background:#F5F5F5;
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
+    margin:32px 10px 10px 10px;
+    padding:16px;
+    height:auto;
+    overflow:auto;
+}
+
+.article:hover {
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 20px;
+}
+
+.article_image {
+    display:block;
+    float:left;
+    max-height:100px;
+    max-width: 120px;
+    padding-right:16px;
+}
+
+.article_title {
+    display:block;
+    margin-bottom:0px;
+    padding:2px;
+    font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+.article_user, .article_date, .article_category {
+    font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.article_user {
+    display:inline-block;
+    margin-bottom:4px;
+}
+
+.article_date {
+    display:inline-block;
+    margin-bottom:4px;
+    margin-left:32px;
+}
+
+.article_category {
+    display:inline-block;
+    margin-bottom:4px;
+    margin-left:32px;
+}
+
+.article_description {
+    display:block;
+    font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+
+/****************************** Article page style ******************************/
+.title {
+    text-align:center;
+    display:block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.article_content {
+    background:#F5F5F5;
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
+    margin:32px 10px 10px 10px;
+    padding:16px;
+}
+
+.article_content_text {
+    display:block;
+    margin-top: 16px;
+    font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}

@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Shadow News</title>
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <ul>
+                <li><a href="Default.aspx">Home</a></li>
+                <li><a href="Articles.aspx">Technology</a></li>
+                <li><a href="Article.aspx">Some article</a></li>
+                <li id="search_button">
+                    <asp:Button ID="Button1" runat="server" Text="Search" OnClick="onSearchButtonClicked" /></li>
+                <li id="search">
+                    <asp:TextBox ID="SearchTextBox" runat="server"></asp:TextBox></li>
+            </ul>
+        </header>
+
+        <div class="content">
+            <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource"></asp:Menu>
+            <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
+
+            <asp:ContentPlaceHolder id="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
