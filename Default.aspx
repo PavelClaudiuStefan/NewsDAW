@@ -16,12 +16,12 @@
         <ItemTemplate>
           <div class="article">
             <asp:Image ID="Image1" runat="server" class="article_image"/>
-            <asp:Label runat="server" ID="Label1" class="article_title"
-                 Text='<%# Eval("title") %>' />
+            <asp:HyperLink ID="HyperLink1" runat="server" class="article_title"
+                 Text='<%# Eval("title") %>' NavigateUrl='<%# "Article.aspx?id=" + Eval("id") %>'/>
             <asp:Label runat="server" ID="Label4" class="article_user"
                  Text='<%# "Posted by: " +  Eval("user_id") %>' />
             <asp:Label runat="server" ID="Label3" class="article_date"
-                 Text='<%# "Created on: " + Eval("date_created") %>' />
+                 Text='<%# Eval("date_created") %>' />
             <asp:Label runat="server" ID="Label5" class="article_category"
                  Text='<%# "In the category: " + Eval("category_id") %>' />
             <asp:Label runat="server" ID="Label2" class="article_description"

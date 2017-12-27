@@ -6,6 +6,12 @@ body{
     margin:0px;
 }
 
+
+/* Header */
+header {
+    box-shadow: rgba(0,0,0,0.4) 10px 10px 10px;
+}
+
 header ul {
     list-style-type: none;
     margin: 0;
@@ -44,6 +50,8 @@ header .active {
     background-color: #4CAF50;
 }
 
+
+/* Content*/
 .content {
     width:960px;
     margin: 70px auto;
@@ -89,6 +97,12 @@ header .active {
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.4px;
+    text-decoration:none;
+    color:black;
+}
+
+.article_title:hover {
+    text-decoration:underline;
 }
 
 .article_user, .article_date, .article_category {
@@ -142,6 +156,59 @@ header .active {
     padding:16px;
 }
 
+.article_content_image {
+    display:block;
+    float:left;
+    max-height:100px;
+    max-width: 120px;
+    padding-right:16px;
+}
+
+.article_content_title {
+    display:block;
+    margin-bottom:0px;
+    padding:2px;
+    font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+.article_content_user, .article_content_date, .article_content_category {
+    font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.article_content_user {
+    display:inline-block;
+    margin-bottom:4px;
+}
+
+.article_content_date {
+    display:inline-block;
+    margin-bottom:4px;
+    margin-left:32px;
+}
+
+.article_content_category {
+    display:inline-block;
+    margin-bottom:4px;
+    margin-left:32px;
+}
+
+.article_content_description {
+    display:block;
+    font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
 .article_content_text {
     display:block;
     margin-top: 16px;
@@ -150,4 +217,34 @@ header .active {
 	font-variant: normal;
 	font-weight: 400;
 	line-height: 20px;
+}
+
+
+/****************************** Sidebar ******************************/
+.sidenav {
+    background-color: #333;
+    height: auto;
+    width: auto;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    left: 0;
+    overflow-x: hidden;
+}
+
+.sidenav .category_link {
+    border-bottom: 1px solid black;
+    padding: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    color: white;
+}
+
+.sidenav a:hover {
+    background-color: #111;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav a {font-size: 18px;}
 }

@@ -14,8 +14,6 @@
         <header>
             <ul>
                 <li><a href="Default.aspx">Home</a></li>
-                <li><a href="Articles.aspx">Technology</a></li>
-                <li><a href="Article.aspx">Some article</a></li>
                 <li id="search_button">
                     <asp:Button ID="Button1" runat="server" Text="Search" OnClick="onSearchButtonClicked" /></li>
                 <li id="search">
@@ -24,12 +22,22 @@
         </header>
 
         <div class="content">
-            <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource"></asp:Menu>
-            <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
-
             <asp:ContentPlaceHolder id="ContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <div class="sidenav">
+            <asp:SqlDataSource ID="SqlCategorySource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM CATEGORY"></asp:SqlDataSource>
+
+            <asp:Repeater ID="RepeaterCategory" runat="server" DataSourceID="SqlCategorySource">
+                <ItemTemplate>
+                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="category_link"
+                        Text='<%# Eval("title") %>'
+                        NavigateUrl='<%# "Articles.aspx?category_id=" + Eval("id") %>'/>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
     </form>
 </body>
 </html>
