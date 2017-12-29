@@ -14,16 +14,16 @@
 
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource">
             <ItemTemplate>
-                <asp:Image ID="ArticleImage" runat="server" class="article_content_image"/>
-                <asp:Label runat="server" ID="TitleLabel" class="article_content_title"
+                <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image"/>
+                <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
                      Text='<%# Eval("title") %>' />
-                <asp:Label runat="server" ID="UserLabel" class="article_content_user"
+                <asp:Label runat="server" ID="UserLabel" CssClass="article_content_user"
                      Text='<%# "Posted by: " +  Eval("user_id") %>' />
-                <asp:Label runat="server" ID="DateLabel" class="article_content_date"
+                <asp:Label runat="server" ID="DateLabel" CssClass="article_content_date"
                      Text='<%# "Created on: " + Eval("date_created") %>' />
-                <asp:Label runat="server" ID="CategoryLabel" class="article_content_category"
+                <asp:Label runat="server" ID="CategoryLabel" CssClass="article_content_category"
                      Text='<%# "In the category: " + Eval("category_id") %>' />
-                <asp:Label runat="server" ID="ContentLabel" class="article_content_text"
+                <asp:Label runat="server" ID="ContentLabel" CssClass="article_content_text"
                      Text='<%# Eval("text") %>' />
             </ItemTemplate>
         </asp:Repeater>

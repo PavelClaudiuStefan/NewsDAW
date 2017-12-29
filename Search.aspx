@@ -16,14 +16,14 @@
         <ItemTemplate>
           <div class="article">
             <!-- Imagine -->
-            <asp:Image ID="Image1" runat="server" class="article_image"/>
-            <asp:HyperLink ID="HyperLink1" runat="server" class="article_title"
+            <asp:Image ID="Image1" runat="server" CssClass="article_image"/>
+            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="article_title"
                  Text='<%# Eval("title") %>' NavigateUrl='<%# "Article.aspx?id=" + Eval("id") %>'/>
-            <asp:Label runat="server" ID="Label4" class="article_user"
+            <asp:Label runat="server" ID="Label4" CssClass="article_user"
                  Text='<%# "Posted by: " +  Eval("user_id") %>' />
-            <asp:Label runat="server" ID="Label3" class="article_date"
+            <asp:Label runat="server" ID="Label3" CssClass="article_date"
                  Text='<%# "Created on: " + Eval("date_created") %>' />
-            <asp:Label runat="server" ID="Label2" class="article_description"
+            <asp:Label runat="server" ID="Label2" CssClass="article_description"
                  Text='<%# Eval("short_description") %>' />
           </div>
         </ItemTemplate>
