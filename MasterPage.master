@@ -14,6 +14,7 @@
         <header>
             <ul>
                 <li><a href="Default.aspx">Home</a></li>
+                <li><a href="AddArticle.aspx">Add article</a></li>
                 <li id="search_button">
                     <asp:Button ID="Button1" runat="server" Text="Search" OnClick="onSearchButtonClicked" /></li>
                 <li id="search">

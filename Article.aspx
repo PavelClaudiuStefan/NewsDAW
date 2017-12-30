@@ -15,7 +15,8 @@
         <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource" OnPreRender="Setup_Articles">
             <ItemTemplate>
                 <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
-                <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image"/>
+                <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
+                <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
                 <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
                      Text='<%# Eval("title") %>' />
                 <asp:Label runat="server" ID="UserLabel" CssClass="article_content_user"

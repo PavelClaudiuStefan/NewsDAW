@@ -8,7 +8,7 @@
 
 <asp:Content ID="CategoryContent" ContentPlaceHolderID="ContentPlaceHolder" Runat="Server">
 
-    <asp:Label ID="category_name" CssClass="category_name" runat="server" Text="Recent" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+    <asp:Label ID="category_name" CssClass="page_name" runat="server" Text="Recent" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ARTICLE] ORDER BY [date_created] DESC"></asp:SqlDataSource>
     
@@ -16,7 +16,8 @@
         <ItemTemplate>
           <div class="article">
             <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
-            <asp:Image ID="Image1" runat="server" CssClass="article_image"/>
+            <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
+            <asp:Image ID="ArticleImage" runat="server" CssClass="article_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
             <asp:HyperLink ID="ArticleHyperLink" runat="server" CssClass="article_title" Target="_blank"
                  Text='<%# Eval("title") %>' NavigateUrl='<%# Eval("ext_url")%>'/>
             <asp:Label runat="server" ID="UserLabel" CssClass="article_user"

@@ -13,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
 
@@ -40,6 +40,14 @@ public partial class _Default : System.Web.UI.Page
             string categoryId = categoryLabel.Text;
             categoryLabel.Text = getCategoryTitle(categoryId);
 
+            //Hide images if ImageUrl is null
+            HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
+            if (thumbnailData.Value == "")
+            {
+                Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                thumbnail.Visible = false;
+            }
+
         }
     }
 
@@ -57,9 +65,11 @@ public partial class _Default : System.Web.UI.Page
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        reader.Read();
-                        int usernameColumnIndex = reader.GetOrdinal("username");
-                        username = reader.GetSqlString(usernameColumnIndex).ToString();
+                        if (reader.Read())
+                        {
+                            int usernameColumnIndex = reader.GetOrdinal("username");
+                            username = reader.GetSqlString(usernameColumnIndex).ToString();
+                        }
                     }
                 }
                 catch (SqlException sqlException)
@@ -85,9 +95,11 @@ public partial class _Default : System.Web.UI.Page
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        reader.Read();
-                        int categoryTitleColumnIndex = reader.GetOrdinal("title");
-                        categoryTitle = reader.GetSqlString(categoryTitleColumnIndex).ToString();
+                        if (reader.Read())
+                        {
+                            int categoryTitleColumnIndex = reader.GetOrdinal("title");
+                            categoryTitle = reader.GetSqlString(categoryTitleColumnIndex).ToString();
+                        }
                     }
                 }
                 catch (SqlException sqlException) { }

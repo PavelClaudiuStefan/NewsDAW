@@ -40,6 +40,14 @@ public partial class Default2 : System.Web.UI.Page
             string userId = userLabel.Text;
             userLabel.Text = getUsername(userId);
 
+            //Hide images if ImageUrl is null
+            HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
+            if (thumbnailData.Value == "")
+            {
+                Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                thumbnail.Visible = false;
+            }
+
         }
     }
 

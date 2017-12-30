@@ -59,7 +59,7 @@ header .active {
 
 
 /****************************** Category page style ******************************/
-.category_name {
+.page_name {
     text-align:center;
     display:block;
     margin: auto;
@@ -247,4 +247,20 @@ header .active {
 
 @media screen and (max-height: 450px) {
     .sidenav a {font-size: 18px;}
+}
+
+
+/****************************** Article form ******************************/
+.article_form_label {
+    display: block;
+    margin-top: 16px;
+}
+
+.article_form_textbox {
+    display: block;
+}
+
+.article_form_button {
+    display: block;
+    margin-top: 16px;
 }

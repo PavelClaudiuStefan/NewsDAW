@@ -12,7 +12,7 @@
 
     <asp:Repeater ID="RepeaterCategory" runat="server" DataSourceID="SqlCategorySource">
         <ItemTemplate>
-            <asp:Label ID="category_name" CssClass="category_name" runat="server" Text='<%# Eval("title") %>' Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+            <asp:Label ID="category_name" CssClass="page_name" runat="server" Text='<%# Eval("title") %>' Font-Bold="True" Font-Size="XX-Large"></asp:Label>
         </ItemTemplate>
     </asp:Repeater>
 
@@ -23,8 +23,9 @@
         <ItemTemplate>
           <div class="article">
             <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
+            <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
             <asp:Image ID="ArticleImage" runat="server" CssClass="article_image"
-                ImageUrl="https://www.w3schools.com/w3css/img_fjords.jpg" />
+                ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
             <asp:HyperLink ID="ArticleHyperLink" runat="server" CssClass="article_title" Target="_blank"
                  Text='<%# Eval("title") %>' NavigateUrl='<%# Eval("ext_url") %>'/>
             <asp:Label runat="server" ID="UserLabel" CssClass="article_user"
