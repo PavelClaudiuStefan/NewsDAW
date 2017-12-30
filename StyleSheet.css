@@ -264,3 +264,14 @@ header .active {
     display: block;
     margin-top: 16px;
 }
+
+
+/****************************** Sorting ******************************/
+.sorting {
+    float: right;
+
+}
+
+.dropdown_list {
+
+}

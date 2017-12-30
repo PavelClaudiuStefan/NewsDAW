@@ -11,19 +11,34 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        String category_id = Request.Params["category_id"];
+        if (!IsPostBack)
+        {
+            string category_id = Request.Params["category_id"];
 
-        SqlCategorySource.SelectCommand = "SELECT * FROM CATEGORY where id = " + category_id;
-        //SqlCategorySource.SelectParameters.Add("category_id", category_id);
-        SqlCategorySource.DataBind();
+            SqlCategorySource.SelectCommand = "SELECT * FROM CATEGORY where id = " + category_id;
+            //SqlCategorySource.SelectParameters.Add("category_id", category_id);
+            SqlCategorySource.DataBind();
 
-        SqlArticleSource.SelectCommand = "SELECT * FROM ARTICLE where category_id = " + category_id + " ORDER BY date_created DESC";
-        //SqlArticleSource.SelectParameters.Add("category_id", category_id);
-        SqlArticleSource.DataBind();
+            string orderBy = OrderByList.SelectedValue;
+            string direction = DirectionList.SelectedValue;
+
+            SqlArticleSource.SelectCommand = "SELECT * FROM ARTICLE where category_id = " + category_id + " ORDER BY " + orderBy + " " + direction;
+            //SqlArticleSource.SelectParameters.Add("category_id", category_id);
+            SqlArticleSource.DataBind();
+        }
+
     }
 
     protected void Setup_Articles(object sender, EventArgs e)
     {
+        string category_id = Request.Params["category_id"];
+        string orderBy = OrderByList.SelectedValue;
+        string direction = DirectionList.SelectedValue;
+
+        SqlArticleSource.SelectCommand = "SELECT * FROM ARTICLE where category_id = " + category_id + " ORDER BY " + orderBy + " " + direction;
+        //SqlArticleSource.SelectParameters.Add("category_id", category_id);
+        SqlArticleSource.DataBind();
+
         foreach (RepeaterItem repeaterItem in RepeaterArticle.Items)
         {
             //Set local urls if ext_url is null
@@ -47,7 +62,6 @@ public partial class Default2 : System.Web.UI.Page
                 Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
                 thumbnail.Visible = false;
             }
-
         }
     }
 

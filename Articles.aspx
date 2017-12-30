@@ -16,6 +16,17 @@
         </ItemTemplate>
     </asp:Repeater>
 
+    <div class="sorting">
+        <asp:DropDownList ID="OrderByList" runat="server" CssClass="dropdown_list" OnSelectedIndexChanged="Setup_Articles" AutoPostBack="true">
+            <asp:ListItem Enabled="true" Text="Order by date" Value="date_created"/>
+            <asp:ListItem Text="Order alphabetically" Value="title"/>
+        </asp:DropDownList>
+
+        <asp:DropDownList ID="DirectionList" runat="server" CssClass="dropdown_list" OnSelectedIndexChanged="Setup_Articles" AutoPostBack="true">
+            <asp:ListItem Enabled="true" Text="Descending" Value="DESC"/>
+            <asp:ListItem Text="Ascending" Value="ASC"/>
+        </asp:DropDownList>
+    </div>
 
     <asp:SqlDataSource ID="SqlArticleSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 
