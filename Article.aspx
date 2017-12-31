@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Article.aspx.cs" Inherits="Default2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Article.aspx.cs" Inherits="Article" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
@@ -16,15 +16,27 @@
             <ItemTemplate>
                 <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
                 <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
+
+                <!-- Vote arrows and score -->
+                <div class="vote_arrows">
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/upvote.png" CssClass="vote_item" OnClick="Upvote"/>
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/downvote.png" CssClass="vote_item" OnClick="Downvote"/>
+                    <asp:Label ID="ScoreLabel" runat="server" Text="100" CssClass="vote_item"></asp:Label>
+                </div>
+
                 <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
-                <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
-                     Text='<%# Eval("title") %>' />
-                <asp:Label runat="server" ID="UserLabel" CssClass="article_content_user"
-                     Text='<%# Eval("user_id") %>' />
-                <asp:Label runat="server" ID="DateLabel" CssClass="article_content_date"
-                     Text='<%# Eval("date_created") %>' />
-                <asp:Label runat="server" ID="CategoryLabel" CssClass="article_content_category"
-                     Text='<%# Eval("category_id") %>' />
+
+                <div class="article_content_header">
+                    <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
+                         Text='<%# Eval("title") %>' />
+                    <asp:Label runat="server" ID="UserLabel" CssClass="article_content_user"
+                         Text='<%# Eval("user_id") %>' />
+                    <asp:Label runat="server" ID="DateLabel" CssClass="article_content_date"
+                         Text='<%# Eval("date_created") %>' />
+                    <asp:Label runat="server" ID="CategoryLabel" CssClass="article_content_category"
+                         Text='<%# Eval("category_id") %>' />
+                </div>
+
                 <asp:Label runat="server" ID="ContentLabel" CssClass="article_content_text"
                      Text='<%# Eval("text") %>' />
             </ItemTemplate>

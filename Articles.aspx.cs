@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Default2 : System.Web.UI.Page
@@ -25,6 +21,7 @@ public partial class Default2 : System.Web.UI.Page
             SqlArticleSource.SelectCommand = "SELECT * FROM ARTICLE where category_id = " + category_id + " ORDER BY " + orderBy + " " + direction;
             //SqlArticleSource.SelectParameters.Add("category_id", category_id);
             SqlArticleSource.DataBind();
+
         }
 
     }
@@ -41,13 +38,22 @@ public partial class Default2 : System.Web.UI.Page
 
         foreach (RepeaterItem repeaterItem in RepeaterArticle.Items)
         {
-            //Set local urls if ext_url is null
+            //Set local urls and score label if ext_url is null
             HyperLink hyperLink = (HyperLink)repeaterItem.FindControl("ArticleHyperLink");
             if (hyperLink.NavigateUrl == "")
             {
                 HiddenField articleIdHiddenField = (HiddenField)repeaterItem.FindControl("ArticleIdHiddenField");
                 string articleId = articleIdHiddenField.Value;
                 hyperLink.NavigateUrl = "Article.aspx?id=" + articleId;
+
+                //Set article score
+                Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
+                scoreLabel.Text = getArticleScore(articleId) + " points";
+            }
+            else
+            {
+                Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
+                scoreLabel.Visible = false;
             }
 
             //Change user ID to username
@@ -91,5 +97,35 @@ public partial class Default2 : System.Web.UI.Page
             }
         }
         return username;
+    }
+
+    private string getArticleScore(string articleId)
+    {
+        string score = "0";
+        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection connection = new SqlConnection(connStr))
+        {
+            using (SqlCommand cmd = new SqlCommand("select upvotes - downvotes as points from (select count(*) as upvotes from ARTICLE_VOTE where article_id = @article_id and type = 1) as up, (select count(*) as downvotes from ARTICLE_VOTE where article_id = @article_id and type = 0) as down", connection))
+            {
+                cmd.Parameters.AddWithValue("article_id", articleId);
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int scoreColumnIndex = reader.GetOrdinal("points");
+                            score = reader.GetSqlValue(scoreColumnIndex).ToString();
+                        }
+                    }
+                }
+                catch (SqlException sqlException)
+                {
+                    Console.WriteLine(sqlException.ToString());
+                }
+            }
+        }
+        return score;
     }
 }

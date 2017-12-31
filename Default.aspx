@@ -20,12 +20,14 @@
             <asp:Image ID="ArticleImage" runat="server" CssClass="article_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
             <asp:HyperLink ID="ArticleHyperLink" runat="server" CssClass="article_title" Target="_blank"
                  Text='<%# Eval("title") %>' NavigateUrl='<%# Eval("ext_url")%>'/>
-            <asp:Label runat="server" ID="UserLabel" CssClass="article_user"
+            <asp:Label runat="server" ID="UserLabel" CssClass="article_sub_element"
                  Text='<%# Eval("user_id") %>' />
-            <asp:Label runat="server" ID="DateLabel" CssClass="article_date"
+            <asp:Label runat="server" ID="DateLabel" CssClass="article_sub_element"
                  Text='<%# Eval("date_created") %>' />
-            <asp:Label runat="server" ID="CategoryLabel" CssClass="article_category"
+            <asp:Label runat="server" ID="CategoryLabel" CssClass="article_sub_element"
                  Text='<%# Eval("category_id") %>' />
+            <asp:Label runat="server" ID="ScoreLabel" CssClass="article_sub_element"
+                 Text="999 points" />
             <asp:Label runat="server" ID="DescriptionLabel" CssClass="article_description"
                  Text='<%# Eval("short_description") %>' />
           </div>

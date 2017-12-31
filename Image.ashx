@@ -23,7 +23,10 @@ public class Image : IHttpHandler {
         try
         {
             byteSeq = strm.Read(buffer, 0, 4096);
-        } catch (Exception exception) { }
+        } catch (Exception exception)
+        {
+                Console.WriteLine(exception.ToString());
+        }
 
         while (byteSeq > 0)
         {
