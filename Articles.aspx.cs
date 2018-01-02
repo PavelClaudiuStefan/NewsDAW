@@ -65,7 +65,7 @@ public partial class Default2 : System.Web.UI.Page
             HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
             if (thumbnailData.Value == "")
             {
-                Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                var thumbnail = repeaterItem.FindControl("ArticleImage");
                 thumbnail.Visible = false;
             }
         }

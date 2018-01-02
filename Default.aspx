@@ -12,7 +12,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ARTICLE] ORDER BY [date_created] DESC"></asp:SqlDataSource>
     
-    <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource" OnPreRender="Setup_Articles" >
+    <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource" OnPreRender="Setup_Articles">
         <ItemTemplate>
           <div class="article">
             <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>

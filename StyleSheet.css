@@ -9,6 +9,7 @@ body{
 .vote_arrows {
     display: block;
     float: left;
+    margin-right: 8px;
 }
 
 .vote_item {
@@ -215,7 +216,7 @@ header .active {
 
 .article_content_text {
     display:block;
-    margin-top: 100px;
+    margin-top: 64px;
     text-indent: 50px;
     font-size: 16px;
 	font-style: normal;
@@ -255,10 +256,20 @@ header .active {
 }
 
 
-/****************************** Article form ******************************/
+/****************************** Add article form ******************************/
+.add_article {
+    background:#F5F5F5;
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
+    margin: auto;
+    padding: 32px 64px 32px 64px;
+    height:auto;
+    overflow:auto;
+}
+
 .article_form_label {
     display: block;
     margin-top: 16px;
+    width: 50%;
 }
 
 .article_form_textbox {
@@ -279,4 +290,124 @@ header .active {
 
 .dropdown_list {
 
+}
+
+/****************************** Comments ******************************/
+.comments {
+    background:#F5F5F5;
+    margin:64px 10px 10px 10px;
+    padding:16px;
+}
+
+.comment {
+    background:#F5F5F5;
+    margin: 0px;
+    padding:0px;
+    margin-bottom: 24px;
+}
+
+.comment_image {
+    float: left;
+    display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 16px;
+}
+
+.comment_header_item {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.comment_text {
+    vertical-align: text-top;
+    display: inline-block;
+    width: 500px;
+}
+
+.comment_section_title {
+    display: block;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+
+/****************************** Logon ******************************/
+.logon_container {
+    background:#F5F5F5;
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
+    margin: 64px auto auto auto;
+    padding:16px;
+    height:auto;
+    overflow:auto;
+    text-align: center;
+    width: 75%;
+}
+
+.logon {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 128px;
+    width: 20%;
+    box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
+    padding: 32px;
+}
+
+.logon_name {
+    text-align:center;
+    display:block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 64px;
+}
+
+.logon_textbox {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+}
+
+.cookie_checkbox {
+    text-align: left;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.logon_links {
+    display: block;
+    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logon_link_container {
+    width: 45%;
+    display: inline-block;
+}
+
+.logon_button {
+
+}
+
+.logon_register {
+    width: 50%;
+    color: black;
+    text-decoration: none;
+}
+
+.logon_register:hover {
+    text-decoration: underline;
+}
+
+.req_field_validator {
+    display: inline-block;
 }

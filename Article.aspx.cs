@@ -8,16 +8,20 @@ public partial class Article : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string id = Request.Params["id"];
-        SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where id = " + id;
-        //SqlDataSource.SelectParameters.Add("id", id);
-        SqlDataSource.DataBind();
+        SqlDataSourceArticle.SelectCommand = "SELECT * FROM ARTICLE where id = " + id;
+        //SqlDataSourceArticle.SelectParameters.Add("id", id);
+        SqlDataSourceArticle.DataBind();
+
+        SqlDataSourceComments.SelectCommand = "SELECT * FROM COMMENT where article_id = " + id + " AND  parent_id = 0"; //parent_id = 0 -> Comment is article child
+        //SqlDataSourceComments.SelectParameters.Add("id", id);
+        SqlDataSourceComments.DataBind();
     }
 
     protected void Setup_Articles(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            foreach (RepeaterItem repeaterItem in Repeater.Items)
+            foreach (RepeaterItem repeaterItem in RepeaterArticle.Items)
             {
 
                 //Change user ID to username
@@ -34,7 +38,7 @@ public partial class Article : System.Web.UI.Page
                 HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
                 if (thumbnailData.Value == "")
                 {
-                    Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                    var thumbnail = repeaterItem.FindControl("ArticleImage");
                     thumbnail.Visible = false;
                 }
 
@@ -161,7 +165,7 @@ public partial class Article : System.Web.UI.Page
             updateVote(articleId, userId, type);
         }
 
-        foreach (RepeaterItem repeaterItem in Repeater.Items)
+        foreach (RepeaterItem repeaterItem in RepeaterArticle.Items)
         {
             //Update article score
             Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
@@ -257,6 +261,66 @@ public partial class Article : System.Web.UI.Page
                 cmd.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+    }
+
+
+
+    protected void Setup_Comments(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            foreach (RepeaterItem repeaterItem in RepeaterComments.Items)
+            {
+
+                //Change user ID to username
+                Label userLabel = (Label)repeaterItem.FindControl("CommentUserLabel");
+                string userId = userLabel.Text;
+                userLabel.Text = getUsername(userId);
+
+                /*
+                //Hide images if ImageUrl is null
+                HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
+                if (thumbnailData.Value == "")
+                {
+                    Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                    thumbnail.Visible = false;
+                }
+
+                //Set article score
+                Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
+                string id = Request.Params["id"];
+                scoreLabel.Text = getArticleScore(id);
+                */
+            }
+        }
+    }
+
+    protected void PostCommentButton_Click(object sender, EventArgs e)
+    {
+        string userId = "1";
+        string articleId = Request.Params["id"];
+        string commentText = PostCommentTextBox.Text;
+        PostCommentTextBox.Text = "";
+        if (commentText != "")
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connStr))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO COMMENT (article_id, user_id, text) VALUES(@article_id, @user_id, @text)", connection))
+                {
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    cmd.Parameters.AddWithValue("@article_id", articleId);
+                    cmd.Parameters.AddWithValue("@text", commentText);
+
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+
+            //TODO - Better way to refresh comments
+            Response.Redirect("Article.aspx?id=" + articleId);
         }
     }
 }

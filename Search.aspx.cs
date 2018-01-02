@@ -12,8 +12,10 @@ public partial class Default2 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         String queryText = Request.Params["q"];
-        SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%" + queryText + "%' ORDER BY date_created DESC";
-        //SqlDataSource.SelectParameters.Add("@text", queryText);
+        //SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%" + queryText + "%' ORDER BY date_created DESC";
+        SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%@text%' ORDER BY date_created DESC";
+        //SqlDataSource.SelectParameters.Add("@text");
+        SqlDataSource.SelectParameters["@text"].DefaultValue = queryText;
         SqlDataSource.DataBind();
     }
 
@@ -53,7 +55,7 @@ public partial class Default2 : System.Web.UI.Page
             HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
             if (thumbnailData.Value == "")
             {
-                Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
+                var thumbnail = repeaterItem.FindControl("ArticleImage");
                 thumbnail.Visible = false;
             }
 

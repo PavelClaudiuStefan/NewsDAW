@@ -8,11 +8,11 @@
 
     <asp:Label ID="category_name" CssClass="page_name" runat="server" Text="Add new article" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
-    <div class="article">
+    <div class="add_article">
         <!-- Article Title -->
         <asp:Label ID="ArticleTitle" runat="server" CssClass="article_form_label"
             Text="Title:" />
-        <asp:TextBox ID="ArticleTitleTextBox" runat="server" CssClass="article_form_textbox" Width="80%"/>
+        <asp:TextBox ID="ArticleTitleTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
 
         <!-- Article Category -->
         <asp:Label ID="Category" runat="server" CssClass="article_form_label"
@@ -23,17 +23,17 @@
         <!-- Article Short Description -->
         <asp:Label ID="ArticleDescription" runat="server" CssClass="article_form_label"
             Text="Description:" />
-        <asp:TextBox ID="ArticleDescriptionTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="80%" Height="100"/>
+        <asp:TextBox ID="ArticleDescriptionTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="100"/>
 
         <!-- Article Text -->
         <asp:Label ID="ArticleText" runat="server" CssClass="article_form_label"
             Text="Text:" />
-        <asp:TextBox ID="ArticleTextTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="80%" Height="200"/>
+        <asp:TextBox ID="ArticleTextTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="200"/>
 
         <!-- Article External URL -->
         <asp:Label ID="ArticleExtUrl" runat="server" CssClass="article_form_label"
             Text="External URL:" />
-        <asp:TextBox ID="ArticleExtUrlTextBox" runat="server" CssClass="article_form_textbox" Width="80%"/>
+        <asp:TextBox ID="ArticleExtUrlTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
 
         <!-- Article Image -->
         <asp:Label ID="ArticleImage" runat="server" CssClass="article_form_label"

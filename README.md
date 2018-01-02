@@ -16,3 +16,9 @@ Website project for DAW
 http://news.cnet.com/
 
 http://news.google.com/
+
+ # Roles:
+ - / -> Visitor     : Can only view articles
+ - 0 -> Normal user : Can add comments and upboat articles and comments
+ - 1 -> Editor      : Can add articles
+ - 2 -> Admin       : Can edit roles

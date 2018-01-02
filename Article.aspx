@@ -10,9 +10,9 @@
 
     <div class="article_content">
 
-        <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSourceArticle" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 
-        <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource" OnPreRender="Setup_Articles">
+        <asp:Repeater ID="RepeaterArticle" runat="server" DataSourceID="SqlDataSourceArticle" OnPreRender="Setup_Articles">
             <ItemTemplate>
                 <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
                 <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
@@ -42,7 +42,54 @@
             </ItemTemplate>
         </asp:Repeater>
 
-    </div>
+        <div class="comments">
 
+            <asp:Label ID="Label1" runat="server" Text="Comments" CssClass="comment_section_title"></asp:Label>
+
+            <div class="comment">    
+                <!-- Comment Image -->    
+                <asp:Image ID="PostCommentImage" runat="server" CssClass="comment_image" ImageUrl="~/images/default_user_image.png"/>
+                
+                <div class="comment_content">
+                    <!-- Comment Header -->
+                    <div class="comment_header">
+                        <asp:Label ID="Label2" runat="server" Text="Pavel Claudiu" CssClass="comment_header_item"></asp:Label>
+                    </div>
+
+                    <!-- Comment Text Box -->
+                    <asp:TextBox ID="PostCommentTextBox" runat="server" CssClass="comment_text"></asp:TextBox>
+                <asp:Button ID="PostCommentButton" runat="server" Text="Post" CssClass="post_comment_button" OnClick="PostCommentButton_Click"/>
+                </div>
+            </div>
+
+
+            <asp:SqlDataSource ID="SqlDataSourceComments" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
+
+            <asp:Repeater ID="RepeaterComments" runat="server" DataSourceID="SqlDataSourceComments" OnPreRender="Setup_Comments">
+                <ItemTemplate>
+                    <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
+
+                    <div class="comment">
+                        <!-- Comment Image -->    
+                        <asp:Image ID="CommentImage" runat="server" CssClass="comment_image" ImageUrl="~/images/default_user_image.png"/>
+                
+                        <div class="comment_content">
+                            <!-- Comment Header -->
+                            <div class="comment_header">
+                                <asp:Label ID="CommentUserLabel" runat="server" Text='<%# Eval("user_id")%>' CssClass="comment_header_item"></asp:Label>
+                                <asp:Label ID="CommentDateLabel" runat="server" Text='<%# Eval("date_created")%>' CssClass="comment_header_item"></asp:Label>
+                                <asp:Label ID="CommentScoreLabel" runat="server" Text="100 points" CssClass="comment_header_item"></asp:Label>
+                            </div>
+
+                            <!-- Comment Text -->
+                            <asp:Label ID="CommentTextLabel" runat="server" Text='<%# Eval("text")%>' CssClass="comment_text"/>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+
+
+        </div>
+    </div>
 </asp:Content>
 

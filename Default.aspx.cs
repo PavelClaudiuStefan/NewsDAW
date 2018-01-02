@@ -13,46 +13,46 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Setup_Articles(object sender, EventArgs e)
     {
-        foreach (RepeaterItem repeaterItem in Repeater.Items)
+        if (!IsPostBack)
         {
-            //Set local urls and score label if ext_url is null
-            HyperLink hyperLink = (HyperLink)repeaterItem.FindControl("ArticleHyperLink");
-            if (hyperLink.NavigateUrl == "")
+            foreach (RepeaterItem repeaterItem in Repeater.Items)
             {
-                HiddenField articleIdHiddenField = (HiddenField)repeaterItem.FindControl("ArticleIdHiddenField");
-                string articleId = articleIdHiddenField.Value;
-                hyperLink.NavigateUrl = "Article.aspx?id=" + articleId;
+                //Set local urls and score label if ext_url is null
+                HyperLink hyperLink = (HyperLink)repeaterItem.FindControl("ArticleHyperLink");
+                if (hyperLink.NavigateUrl == "")
+                {
+                    HiddenField articleIdHiddenField = (HiddenField)repeaterItem.FindControl("ArticleIdHiddenField");
+                    string articleId = articleIdHiddenField.Value;
+                    hyperLink.NavigateUrl = "Article.aspx?id=" + articleId;
 
-                //Set article score
-                Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
-                scoreLabel.Text = getArticleScore(articleId) + " points";
+                    //Set article score
+                    Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
+                    scoreLabel.Text = getArticleScore(articleId) + " points";
+                }
+                else
+                {
+                    Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
+                    scoreLabel.Visible = false;
+                }
+
+                //Change user ID to username
+                Label userLabel = (Label)repeaterItem.FindControl("UserLabel");
+                string userId = userLabel.Text;
+                userLabel.Text = getUsername(userId);
+
+                //Change category ID to category title
+                Label categoryLabel = (Label)repeaterItem.FindControl("CategoryLabel");
+                string categoryId = categoryLabel.Text;
+                categoryLabel.Text = getCategoryTitle(categoryId);
+
+                //Hide images if ImageUrl is null
+                HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
+                if (thumbnailData.Value == "")
+                {
+                    var thumbnail = repeaterItem.FindControl("ArticleImage");
+                    thumbnail.Visible = false;
+                }
             }
-            else
-            {
-                Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
-                scoreLabel.Visible = false;
-            }
-
-            //Change user ID to username
-            Label userLabel = (Label)repeaterItem.FindControl("UserLabel");
-            string userId = userLabel.Text;
-            userLabel.Text = getUsername(userId);
-
-            //Change category ID to category title
-            Label categoryLabel = (Label)repeaterItem.FindControl("CategoryLabel");
-            string categoryId = categoryLabel.Text;
-            categoryLabel.Text = getCategoryTitle(categoryId);
-
-            //Hide images if ImageUrl is null
-            HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
-            if (thumbnailData.Value == "")
-            {
-                Image thumbnail = (Image)repeaterItem.FindControl("ArticleImage");
-                thumbnail.Visible = false;
-            }
-
-            
-
         }
     }
 

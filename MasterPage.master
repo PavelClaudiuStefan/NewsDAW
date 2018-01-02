@@ -19,6 +19,8 @@
                     <asp:Button ID="Button1" runat="server" Text="Search" OnClick="onSearchButtonClicked" /></li>
                 <li id="search">
                     <asp:TextBox ID="SearchTextBox" runat="server"></asp:TextBox></li>
+                <li><asp:Button ID="SignOutButton" runat="server" Text="Sign out" OnClick="SignOutButton_Click"/></li>
+                <li><asp:Label ID="LoggedUserLabel" runat="server" Text="User" ForeColor="White"></asp:Label></li>
             </ul>
         </header>
 
