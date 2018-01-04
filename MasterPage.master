@@ -16,7 +16,7 @@
             <div class="header_container">
                 <div class="header_left">
                     <asp:HyperLink ID="HomeLink" runat="server" Text="Shadow News" NavigateUrl="Default.aspx" CssClass="home_link"/>
-                    <asp:HyperLink ID="AddArticleLink" runat="server" Text="New article" NavigateUrl="AddArticle.aspx" CssClass="add_article_link"/>
+                    <asp:HyperLink ID="AddArticleLink" runat="server" Text="New article" NavigateUrl="AddArticle.aspx" CssClass="add_article_link" Visible="false"/>
                 </div>
 
                 <div class="header_middle">
@@ -27,9 +27,9 @@
                 </div>
 
                 <div class="header_right">
-                    <asp:HyperLink ID="LoggedUserLink" runat="server" Text="Not logged in" CssClass="logged_user_link"/>
-                    <asp:HyperLink ID="LogonLink" runat="server" Text="Log in" CssClass="login_link" NavigateUrl="~/Logon.aspx"/>
                     <asp:Button ID="SignOutButton" runat="server" Text="Sign out" OnClick="SignButton_Click" CssClass="sign_button" Visible="false"/>
+                    <asp:HyperLink ID="LogonLink" runat="server" Text="Log in" CssClass="login_link" NavigateUrl="~/Logon.aspx"/>
+                    <asp:HyperLink ID="LoggedUserLink" runat="server" Text="Not logged in" CssClass="logged_user_link"/>
                 </div>
                 
             </div>

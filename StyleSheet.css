@@ -48,7 +48,6 @@ header {
 .header_middle {
     width: 49%;
     overflow: hidden;
-    position: relative;
 }
 
 .header_right {
@@ -58,7 +57,7 @@ header {
 
 .home_link, .add_article_link {
     display: inline-block;
-    margin: 18px 8px;
+    margin: 4%;
     text-decoration: none;
     color: black;
     font-size: 26px;
@@ -68,34 +67,40 @@ header {
     text-decoration: underline;
 }
 
+.search {
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    margin: auto;
+}
+
 .search_bar, .search_button {
+    margin: 14px 0;
     display: inline-block;
     background-color: white;
     border: none;
-    position: absolute;
-    margin: 14px 0;
 }
 
 .search_bar {
-    display: inline-block;
     font-size: 22px;
     height: 36px;
-    width: 94%;
+    flex: 1 1 auto;
 }
 
 .search_button {
     display: inline-block;
     height: 24px;
     padding: 7px;
-    right: 0;
+    flex: 0 1 24px;
 }
 
 .sign_button, .login_link, .logged_user_link {
     display: inline-block;
-    margin: 18px 8px;
+    margin: 4%;
     text-decoration: none;
     color: black;
     font-size: 26px;
+    float: right;
 }
 
 .login_link:hover {
@@ -191,7 +196,7 @@ header {
 .article_content {
     background:#F5F5F5;
     box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
-    margin:32px 10px 10px 10px;
+    margin:128px 10px 10px 10px;
     padding:16px;
 }
 
@@ -269,12 +274,12 @@ header {
 
 /****************************** Sidebar ******************************/
 .sidenav {
-    background-color: #333;
+    background-color: #e9e9e9;
     height: auto;
     width: auto;
     position: fixed;
     z-index: 1;
-    top: 156px;
+    top: 80px;
     left: 0;
     overflow-x: hidden;
 }
@@ -285,15 +290,29 @@ header {
     text-decoration: none;
     font-size: 16px;
     display: block;
-    color: white;
+    color: black;
 }
 
-.sidenav a:hover {
-    background-color: #111;
+.sidenav .category_link:first-child {
+    border-top: 1px solid black;    
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav a {font-size: 18px;}
+    .sidenav a:hover {
+        background-color: navajowhite;
+    }
+
+@media screen and (max-height: 450px) and (max-width: 1080px) {
+    .sidenav a {
+        font-size: 12px;
+    }
+
+    .home_link, .add_article_link {
+        font-size: 16px;
+    }
+
+    .sign_button, .login_link, .logged_user_link {
+        font-size: 16px;
+    }
 }
 
 

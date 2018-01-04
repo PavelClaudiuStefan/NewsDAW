@@ -21,6 +21,8 @@
                 <asp:TextBox ID="PasswordTextbox" runat="server" CssClass="logon_textbox" placeholder="Password" TextMode="Password"></asp:TextBox> 
                 <asp:RequiredFieldValidator ID="ReqPwdValidator" runat="server" ErrorMessage="*" ControlToValidate="PasswordTextbox" CssClass="req_field_validator"/>
 
+                <br />
+
                 <div class="cookie_checkbox">
                     <asp:CheckBox ID="chkPersistCookie" runat="server" autopostback="false"/>
                     <asp:Label ID="PersistentCookieLabel" runat="server" Text="Remember me"/>
