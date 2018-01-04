@@ -13,18 +13,16 @@ public partial class MasterPage : System.Web.UI.MasterPage
         try
         {
             string loggedUser = HttpContext.Current.User.Identity.Name;
-            if (loggedUser == "")
+            if (loggedUser != "")
             {
-                LoggedUserLabel.Text = "Not logged in";
-            }
-            else
-            {
-                LoggedUserLabel.Text = loggedUser;
+                LoggedUserLink.Text = loggedUser;
+                SignOutButton.Visible = true;
+                LogonLink.Visible = false;
             }
         }
         catch (Exception ex)
         {
-            LoggedUserLabel.Text = ex.ToString();
+            LoggedUserLink.Text = ex.ToString();
         }
     }
 
@@ -34,9 +32,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         Response.Redirect("http://localhost:62643/Search.aspx?q=" + text);
     }
 
-    protected void SignOutButton_Click(object sender, EventArgs e)
+    protected void SignButton_Click(object sender, EventArgs e)
     {
         FormsAuthentication.SignOut();
-        Response.Redirect("Logon.aspx", true);
+        Response.Redirect("Default.aspx", true);
     }
 }

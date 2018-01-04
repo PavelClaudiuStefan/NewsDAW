@@ -8,7 +8,7 @@
 
 <asp:Content ID="CategoryContent" ContentPlaceHolderID="ContentPlaceHolder" Runat="Server">
 
-    <asp:Label ID="category_name" CssClass="category_name" runat="server" Text="Search results" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+    <asp:Label ID="PageNameLabel" CssClass="page_name" runat="server" Text="Search results" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 

@@ -22,7 +22,10 @@ public partial class Logon : System.Web.UI.Page
             FormsAuthentication.RedirectFromLoginPage(UsernameTextbox.Text,
             chkPersistCookie.Checked);
         else
-            Response.Redirect("logon.aspx", true);
+        { 
+            //Response.Redirect("logon.aspx", true);
+            LoginFailedLabel.Visible = true;
+        }
     }
 
     private bool ValidateUser(string userName, string passWord)

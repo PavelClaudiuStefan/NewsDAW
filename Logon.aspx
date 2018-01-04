@@ -36,6 +36,8 @@
                     </div>
                 </div>
 
+                <asp:Label ID="LoginFailedLabel" runat="server" Text="Login failed!" ForeColor="Red" CssClass="login_failed" Visible="false"></asp:Label>
+
             </div>
 
         </div>  
