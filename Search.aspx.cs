@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Default2 : System.Web.UI.Page
+public partial class Search : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         String queryText = Request.Params["q"];
         SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%" + queryText + "%' ORDER BY date_created DESC";
-        //SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%@text%' ORDER BY date_created DESC";
+        //SqlDataSource.SelectCommand = "SELECT * FROM ARTICLE where title like '%@query_text%' ORDER BY date_created DESC";
+
+        //SqlDataSource.SelectParameters["query_text"].DefaultValue = queryText;
+        //PageNameLabel.Text = SqlDataSource.SelectParameters["query_text"].DefaultValue;
+
         SqlDataSource.DataBind();
     }
 

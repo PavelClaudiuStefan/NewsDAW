@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Search.aspx.cs" Inherits="Default2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Search.aspx.cs" Inherits="Search" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
@@ -10,7 +10,13 @@
 
     <asp:Label ID="PageNameLabel" CssClass="page_name" runat="server" Text="Search results" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
-    <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="query_text" DbType = "String" Direction = "Input" QueryStringField="q" DefaultValue=""/>
+            
+
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource" OnPreRender="Setup_Articles">
         <ItemTemplate>

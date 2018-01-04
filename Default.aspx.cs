@@ -109,7 +109,7 @@ public partial class _Default : System.Web.UI.Page
                 }
                 catch (SqlException sqlException)
                 {
-                    Console.WriteLine(sqlException.ToString());
+                    System.Diagnostics.Debug.WriteLine(sqlException.ToString());
                 }
             }
         }

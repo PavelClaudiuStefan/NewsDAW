@@ -18,7 +18,8 @@ http://news.cnet.com/
 http://news.google.com/
 
  # Roles:
- - / -> Visitor     : Can only view articles
- - 0 -> Normal user : Can add comments and upboat articles and comments
- - 1 -> Editor      : Can add articles
- - 2 -> Admin       : Can edit roles
+ - 0 -> Visitor     : Can only view articles
+ - 1 -> Normal user : Can add comments and upboat articles and comments
+ - 2 -> Editor      : Can add articles
+ - 3 -> Admin       : Can edit roles of everyone except other admins
+ - 9 -> Owner       : Can edit roles of everyone

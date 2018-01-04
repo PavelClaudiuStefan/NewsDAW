@@ -19,8 +19,8 @@
 
                 <!-- Vote arrows and score -->
                 <div class="vote_arrows">
-                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/upvote.png" CssClass="vote_item" OnClick="Upvote"/>
-                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/downvote.png" CssClass="vote_item" OnClick="Downvote"/>
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/upvote.png" CssClass="vote_item" CausesValidation="false" OnClick="Upvote"/>
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/downvote.png" CssClass="vote_item" CausesValidation="false" OnClick="Downvote"/>
                     <asp:Label ID="ScoreLabel" runat="server" Text="100" CssClass="vote_item"></asp:Label>
                 </div>
 
@@ -53,12 +53,13 @@
                 <div class="comment_content">
                     <!-- Comment Header -->
                     <div class="comment_header">
-                        <asp:Label ID="Label2" runat="server" Text="Pavel Claudiu" CssClass="comment_header_item"></asp:Label>
+                        <asp:Label ID="LoggedUserLabel" runat="server" Text="Not logged in" CssClass="comment_header_item"></asp:Label>
                     </div>
 
                     <!-- Comment Text Box -->
                     <asp:TextBox ID="PostCommentTextBox" runat="server" CssClass="comment_text"></asp:TextBox>
-                <asp:Button ID="PostCommentButton" runat="server" Text="Post" CssClass="post_comment_button" OnClick="PostCommentButton_Click"/>
+                    <asp:Button ID="PostCommentButton" runat="server" Text="Post" CssClass="post_comment_button" OnClick="PostCommentButton_Click"/>
+                    <asp:RequiredFieldValidator ID="ReqCommentValidator" runat="server" ErrorMessage="Comment cannot be empty" ControlToValidate="PostCommentTextBox" CssClass="req_field_validator"/>
                 </div>
             </div>
 

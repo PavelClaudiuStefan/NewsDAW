@@ -282,24 +282,35 @@ header {
     top: 80px;
     left: 0;
     overflow-x: hidden;
+    height: 100%;
 }
 
 .sidenav .category_link {
-    border-bottom: 1px solid black;
-    padding: 8px;
+    padding: 12px;
     text-decoration: none;
     font-size: 16px;
     display: block;
     color: black;
 }
 
-.sidenav .category_link:first-child {
-    border-top: 1px solid black;    
+.add_category_link {
+    padding: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    color: black;
+    border-top: 1px solid black;
+    padding: 20px 12px;
+    font-size: 24px;
 }
 
-    .sidenav a:hover {
-        background-color: navajowhite;
-    }
+.sidenav .category_link:first-child {
+    border-top: 1px solid black;
+}
+
+.sidenav a:hover {
+    background-color: white;
+}
 
 @media screen and (max-height: 450px) and (max-width: 1080px) {
     .sidenav a {
@@ -399,7 +410,7 @@ header {
 
 
 /****************************** Logon ******************************/
-.logon_container {
+.logon_page {
     background:#F5F5F5;
     box-shadow:rgba(0,0,0,0.4) 2px 2px 5px;
     margin: 64px auto auto auto;
@@ -419,6 +430,11 @@ header {
     padding: 32px;
 }
 
+.logon_container {
+    width: 65%;
+    margin: auto;
+}
+
 .logon_name {
     text-align:center;
     display:block;
@@ -430,38 +446,31 @@ header {
 
 .logon_textbox {
     display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 90%;
     margin-bottom: 16px;
 }
 
 .cookie_checkbox {
     text-align: left;
-    display: inline-block;
+    display: block;
     font-size: 14px;
     margin-bottom: 16px;
 }
 
 .logon_links {
     display: block;
-    margin-top: 8px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.logon_link_container {
-    width: 45%;
-    display: inline-block;
 }
 
 .logon_button {
-
+    float: left;
+    margin-left: 2px;
 }
 
 .logon_register {
-    width: 50%;
+    float: right;
     color: black;
     text-decoration: none;
+    margin-right: 8px;
 }
 
 .logon_register:hover {
@@ -469,10 +478,11 @@ header {
 }
 
 .req_field_validator {
-    display: inline-block;
+    
 }
 
 .login_failed {
     display: block;
     margin-top: 16px;
+    clear: both;
 }

@@ -22,13 +22,13 @@
                 <div class="header_middle">
                     <div class="search">
                         <asp:TextBox ID="SearchTextBox" runat="server" CssClass="search_bar" placeholder=" Search.."/>
-                        <asp:ImageButton ID="SearchButton" runat="server" OnClick="onSearchButtonClicked" CssClass="search_button" ImageUrl="~/images/search.png"/>
+                        <asp:ImageButton ID="SearchButton" runat="server" OnClick="onSearchButtonClicked" CssClass="search_button" ImageUrl="~/images/search.png" CausesValidation="false"/>
                     </div>
                 </div>
 
                 <div class="header_right">
-                    <asp:Button ID="SignOutButton" runat="server" Text="Sign out" OnClick="SignButton_Click" CssClass="sign_button" Visible="false"/>
-                    <asp:HyperLink ID="LogonLink" runat="server" Text="Log in" CssClass="login_link" NavigateUrl="~/Logon.aspx"/>
+                    <asp:Button ID="SignOutButton" runat="server" Text="Sign out" OnClick="SignButton_Click" CssClass="sign_button" Visible="false" CausesValidation="false"/>
+                    <asp:HyperLink ID="LogonLink" runat="server" Text="Log in" CssClass="login_link"/>
                     <asp:HyperLink ID="LoggedUserLink" runat="server" Text="Not logged in" CssClass="logged_user_link"/>
                 </div>
                 
@@ -50,6 +50,9 @@
                         NavigateUrl='<%# "Articles.aspx?category_id=" + Eval("id") %>'/>
                 </ItemTemplate>
             </asp:Repeater>
+
+            <asp:HyperLink ID="AddCategoryLink" runat="server" Text="New category" NavigateUrl="AddCategory.aspx" CssClass="add_category_link" Visible="false"/>
+
         </div>
 
     </form>

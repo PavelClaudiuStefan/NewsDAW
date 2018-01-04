@@ -1,20 +1,39 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Web;
 using System.Web.UI.WebControls;
 
 public partial class Article : System.Web.UI.Page
 {
+    string loggedUser = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        string id = Request.Params["id"];
-        SqlDataSourceArticle.SelectCommand = "SELECT * FROM ARTICLE where id = " + id;
-        //SqlDataSourceArticle.SelectParameters.Add("id", id);
-        SqlDataSourceArticle.DataBind();
+        if (!IsPostBack)
+        {
+            string articleId = Request.Params["id"];
+            SqlDataSourceArticle.SelectCommand = "SELECT * FROM ARTICLE where id = " + articleId;
+            //SqlDataSourceArticle.SelectParameters.Add("id", id);
+            SqlDataSourceArticle.DataBind();
 
-        SqlDataSourceComments.SelectCommand = "SELECT * FROM COMMENT where article_id = " + id + " AND  parent_id = 0"; //parent_id = 0 -> Comment is article child
-        //SqlDataSourceComments.SelectParameters.Add("id", id);
-        SqlDataSourceComments.DataBind();
+            SqlDataSourceComments.SelectCommand = "SELECT * FROM COMMENT where article_id = " + articleId + " AND  parent_id = 0"; //parent_id = 0 -> Comment is article child
+                                                                                                                            //SqlDataSourceComments.SelectParameters.Add("id", id);
+            SqlDataSourceComments.DataBind();
+
+            try
+            {
+                loggedUser = HttpContext.Current.User.Identity.Name;
+                if (loggedUser != "")
+                {
+                    LoggedUserLabel.Text = loggedUser;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggedUserLabel.Text = ex.ToString();
+            }
+        }
     }
 
     protected void Setup_Articles(object sender, EventArgs e)
@@ -137,19 +156,35 @@ public partial class Article : System.Web.UI.Page
 
     protected void Upvote(object sender, System.Web.UI.ImageClickEventArgs e)
     {
-        SetOrUpdateVote("1");
+        loggedUser = HttpContext.Current.User.Identity.Name;
+        if (loggedUser == "")
+        {
+            Response.Redirect("Logon.aspx?ReturnUrl=" + Session["return_url"].ToString());
+        }
+        else
+        {
+            string userId = getUserId(loggedUser);
+            SetOrUpdateVote(userId, "1");
+        }        
     }
 
     protected void Downvote(object sender, System.Web.UI.ImageClickEventArgs e)
     {
-        SetOrUpdateVote("0");
+        loggedUser = HttpContext.Current.User.Identity.Name;
+        if (loggedUser == "")
+        {
+            Response.Redirect("Logon.aspx?ReturnUrl=" + Session["return_url"].ToString());
+        }
+        else
+        {
+            string userId = getUserId(loggedUser);
+            SetOrUpdateVote(userId, "0");
+        }
     }
 
-    private void SetOrUpdateVote(string type)
+    private void SetOrUpdateVote(string userId, string type)
     {
         string articleId = Request.Params["id"];
-        //TODO - Change from hardcoded user to actual user
-        string userId ="1";
         string userVote = getUserVote(articleId, userId);
 
         if (userVote == "-1")
@@ -181,7 +216,6 @@ public partial class Article : System.Web.UI.Page
          */
     private string getUserVote(string articleId, string userId)
     {
-        
         string type = "-1";
         string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         using (SqlConnection connection = new SqlConnection(connStr))
@@ -216,7 +250,7 @@ public partial class Article : System.Web.UI.Page
         string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         using (SqlConnection connection = new SqlConnection(connStr))
         {            
-            using (SqlCommand cmd = new SqlCommand("INSERT INTO ARTICLE_VOTE VALUES(@user_id, @article_id, @type)", connection))
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO ARTICLE_VOTE (user_id, article_id, type) VALUES(@user_id, @article_id, @type)", connection))
             {
                 cmd.Parameters.AddWithValue("@user_id", userId);
                 cmd.Parameters.AddWithValue("@article_id", articleId);
@@ -264,8 +298,6 @@ public partial class Article : System.Web.UI.Page
         }
     }
 
-
-
     protected void Setup_Comments(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -298,29 +330,67 @@ public partial class Article : System.Web.UI.Page
 
     protected void PostCommentButton_Click(object sender, EventArgs e)
     {
-        string userId = "1";
         string articleId = Request.Params["id"];
-        string commentText = PostCommentTextBox.Text;
-        PostCommentTextBox.Text = "";
-        if (commentText != "")
+        loggedUser = HttpContext.Current.User.Identity.Name;
+        if (loggedUser == "")
         {
-            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(connStr))
+            Response.Redirect("Logon.aspx?ReturnUrl=" + Session["return_url"].ToString());
+        }
+        else
+        {
+            string userId = getUserId(loggedUser);
+            string commentText = PostCommentTextBox.Text;
+            PostCommentTextBox.Text = "";
+            if (commentText != "")
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO COMMENT (article_id, user_id, text) VALUES(@article_id, @user_id, @text)", connection))
+                string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connStr))
                 {
-                    cmd.Parameters.AddWithValue("@user_id", userId);
-                    cmd.Parameters.AddWithValue("@article_id", articleId);
-                    cmd.Parameters.AddWithValue("@text", commentText);
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO COMMENT (article_id, user_id, text) VALUES(@article_id, @user_id, @text)", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@user_id", userId);
+                        cmd.Parameters.AddWithValue("@article_id", articleId);
+                        cmd.Parameters.AddWithValue("@text", commentText);
 
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+
+                //TODO - Better way to refresh comments
+                Response.Redirect("Article.aspx?id=" + articleId);
+            }
+        }
+    }
+
+    private string getUserId(string username)
+    {
+        string userId = "";
+        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection connection = new SqlConnection(connStr))
+        {
+            using (SqlCommand cmd = new SqlCommand("select id from [USER] where username = @username", connection))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                try
+                {
                     connection.Open();
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int idColumnIndex = reader.GetOrdinal("id");
+                            userId = reader.GetSqlValue(idColumnIndex).ToString();
+                        }
+                    }
+                }
+                catch (SqlException sqlException)
+                {
+                    System.Diagnostics.Debug.WriteLine(sqlException.ToString());
                 }
             }
-
-            //TODO - Better way to refresh comments
-            Response.Redirect("Article.aspx?id=" + articleId);
         }
+        return userId;
     }
 }

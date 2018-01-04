@@ -58,11 +58,9 @@ public partial class Logon : System.Web.UI.Page
 
         if (null == lookupPassword)
         {
-            // You could write failed login attempts here to event log for additional security.
             return false;
         }
 
-        // Compare lookupPassword and input passWord, using a case-sensitive comparison.
         return (0 == string.Compare(lookupPassword, passWord, false));
 
     }

@@ -6,13 +6,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" Runat="Server">
 
-    <asp:Label ID="category_name" CssClass="page_name" runat="server" Text="Add new article" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+    <asp:Label ID="page_name" CssClass="page_name" runat="server" Text="Add new article" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
     <div class="add_article">
         <!-- Article Title -->
         <asp:Label ID="ArticleTitle" runat="server" CssClass="article_form_label"
             Text="Title:" />
         <asp:TextBox ID="ArticleTitleTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
+        <asp:RequiredFieldValidator ID="ReqTitleValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleTitleTextBox" CssClass="req_field_validator"/>
 
         <!-- Article Category -->
         <asp:Label ID="Category" runat="server" CssClass="article_form_label"
@@ -24,6 +25,7 @@
         <asp:Label ID="ArticleDescription" runat="server" CssClass="article_form_label"
             Text="Description:" />
         <asp:TextBox ID="ArticleDescriptionTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="100"/>
+        <asp:RequiredFieldValidator ID="ReqDescriptionValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleDescriptionTextBox" CssClass="req_field_validator"/>
 
         <!-- Article Text -->
         <asp:Label ID="ArticleText" runat="server" CssClass="article_form_label"
@@ -42,6 +44,8 @@
 
         <!-- Submit Button -->
         <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="Add_Article" CssClass="article_form_button"/>
+
+        <asp:Label ID="ErrorLabel" runat="server" Visible="false" />
 
     </div>
 
