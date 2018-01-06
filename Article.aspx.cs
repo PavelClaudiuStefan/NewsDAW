@@ -67,6 +67,23 @@ public partial class Article : System.Web.UI.Page
                 Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
                 string id = Request.Params["id"];
                 scoreLabel.Text = getArticleScore(id);
+
+                //Set upvote/downvote arrows
+                string loggedUserVote = getUserVote(id, userId);
+                if (loggedUserVote == "-1")
+                {
+                    //Do nothing
+                } else if (loggedUserVote == "0")
+                {
+                    //Downvote arrow -> selected
+                    ImageButton downVote = (ImageButton)repeaterItem.FindControl("ImageButton2");
+                    downVote.ImageUrl = "~/images/downvote_selected.png";
+                } else
+                {
+                    //Upvote arrow -> selected
+                    ImageButton upvoteArrow = (ImageButton)repeaterItem.FindControl("ImageButton1");
+                    upvoteArrow.ImageUrl = "~/images/upvote_selected.png";
+                }
             }
         }
     }
@@ -208,6 +225,38 @@ public partial class Article : System.Web.UI.Page
             Label scoreLabel = (Label)repeaterItem.FindControl("ScoreLabel");
             string id = Request.Params["id"];
             scoreLabel.Text = getArticleScore(id);
+
+            //Set upvote/downvote arrows
+            string loggedUserVote = getUserVote(id, userId);
+            if (loggedUserVote == "-1")
+            {
+                //Downvote || Upvote arrow -> Not selected
+                ImageButton downVote = (ImageButton)repeaterItem.FindControl("ImageButton2");
+                downVote.ImageUrl = "~/images/downvote.png";
+
+                ImageButton upvoteArrow = (ImageButton)repeaterItem.FindControl("ImageButton1");
+                upvoteArrow.ImageUrl = "~/images/upvote.png";
+            }
+            else if (loggedUserVote == "0")
+            {
+                //Downvote arrow -> Selected
+                ImageButton downVote = (ImageButton)repeaterItem.FindControl("ImageButton2");
+                downVote.ImageUrl = "~/images/downvote_selected.png";
+
+                //Upvote arrow -> Not selected
+                ImageButton upvoteArrow = (ImageButton)repeaterItem.FindControl("ImageButton1");
+                upvoteArrow.ImageUrl = "~/images/upvote.png";
+            }
+            else
+            {
+                //Downvote arrow -> Not selected
+                ImageButton downVote = (ImageButton)repeaterItem.FindControl("ImageButton2");
+                downVote.ImageUrl = "~/images/downvote.png";
+
+                //Upvote arrow -> Selected
+                ImageButton upvoteArrow = (ImageButton)repeaterItem.FindControl("ImageButton1");
+                upvoteArrow.ImageUrl = "~/images/upvote_selected.png";
+            }
         }
     }
 
