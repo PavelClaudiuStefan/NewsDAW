@@ -634,6 +634,11 @@ header {
     float: left;
 }
 
- {
-    border: 1px solid black;
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
 }

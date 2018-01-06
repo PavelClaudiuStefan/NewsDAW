@@ -49,6 +49,11 @@ public partial class User : System.Web.UI.Page
     {
         foreach (RepeaterItem repeaterItem in RepeaterUser.Items)
         {
+            //Set link to edit user profile
+            string username = Request.Params["username"];
+            HyperLink editUserLink = (HyperLink)repeaterItem.FindControl("EditUserLink");
+            editUserLink.NavigateUrl = "EditUser.aspx?username=" + username;
+
             //Hide images if ImageUrl is null
             HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
             if (thumbnailData.Value == "")

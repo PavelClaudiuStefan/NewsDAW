@@ -49,6 +49,9 @@
                                 Text='<%# Eval("role") %>' />
                         </div>
                     </div>
+
+                    <asp:HyperLink ID="EditUserLink" runat="server" Text="Edit profile" NavigateUrl="EditUser.aspx" CssClass="link"/>
+
                 </div>
             </ItemTemplate>
         </asp:Repeater>

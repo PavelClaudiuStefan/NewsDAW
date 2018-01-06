@@ -18,6 +18,11 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void Add_Article(object sender, EventArgs e)
     {
+        if (string.IsNullOrEmpty(ArticleTextTextBox.Text) && string.IsNullOrEmpty(ArticleExtUrlTextBox.Text))
+        {
+            TextOrExtLabel.Visible = true;
+            return;
+        }
 
         string username = HttpContext.Current.User.Identity.Name;
 
@@ -113,5 +118,13 @@ public partial class Default2 : System.Web.UI.Page
             }
         }
         return userId;
+    }
+
+    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        if (string.IsNullOrEmpty(ArticleTextTextBox.Text) && string.IsNullOrEmpty(ArticleExtUrlTextBox.Text))
+        {
+            args.IsValid = false;
+        }
     }
 }

@@ -8,46 +8,55 @@
 
     <asp:Label ID="page_name" CssClass="page_name" runat="server" Text="Add new article" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
 
-    <div class="add_article">
-        <!-- Article Title -->
-        <asp:Label ID="ArticleTitle" runat="server" CssClass="article_form_label"
-            Text="Title:" />
-        <asp:TextBox ID="ArticleTitleTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
-        <asp:RequiredFieldValidator ID="ReqTitleValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleTitleTextBox" CssClass="req_field_validator"/>
+    <asp:Panel ID="Panel1" runat="server">
 
-        <!-- Article Category -->
-        <asp:Label ID="Category" runat="server" CssClass="article_form_label"
-            Text="Category:" />
-        <asp:DropDownList ID="DropDownList" runat="server" DataSourceID="SqlDataSource" DataTextField="title" DataValueField="id"></asp:DropDownList>
-        <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [title] FROM [CATEGORY]"></asp:SqlDataSource>
+        <div class="add_article">
+            <!-- Article Title -->
+            <asp:Label ID="ArticleTitle" runat="server" CssClass="article_form_label"
+                Text="Title:" />
+            <asp:TextBox ID="ArticleTitleTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
+            <asp:RequiredFieldValidator ID="ReqTitleValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleTitleTextBox" CssClass="req_field_validator"/>
 
-        <!-- Article Short Description -->
-        <asp:Label ID="ArticleDescription" runat="server" CssClass="article_form_label"
-            Text="Description:" />
-        <asp:TextBox ID="ArticleDescriptionTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="100"/>
-        <asp:RequiredFieldValidator ID="ReqDescriptionValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleDescriptionTextBox" CssClass="req_field_validator"/>
+            <!-- Article Category -->
+            <asp:Label ID="Category" runat="server" CssClass="article_form_label"
+                Text="Category:" />
+            <asp:DropDownList ID="DropDownList" runat="server" DataSourceID="SqlDataSource" DataTextField="title" DataValueField="id"></asp:DropDownList>
+            <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [id], [title] FROM [CATEGORY]"></asp:SqlDataSource>
 
-        <!-- Article Text -->
-        <asp:Label ID="ArticleText" runat="server" CssClass="article_form_label"
-            Text="Text:" />
-        <asp:TextBox ID="ArticleTextTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="200"/>
+            <!-- Article Short Description -->
+            <asp:Label ID="ArticleDescription" runat="server" CssClass="article_form_label"
+                Text="Description:" />
+            <asp:TextBox ID="ArticleDescriptionTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="100"/>
+            <asp:RequiredFieldValidator ID="ReqDescriptionValidator" runat="server" ErrorMessage="*" ControlToValidate="ArticleDescriptionTextBox" CssClass="req_field_validator"/>
 
-        <!-- Article External URL -->
-        <asp:Label ID="ArticleExtUrl" runat="server" CssClass="article_form_label"
-            Text="External URL:" />
-        <asp:TextBox ID="ArticleExtUrlTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
+            <!-- Article Text -->
+            <asp:Label ID="ArticleText" runat="server" CssClass="article_form_label"
+                Text="Text:" />
+            <asp:TextBox ID="ArticleTextTextBox" runat="server" CssClass="article_form_textbox" TextMode="MultiLine" Width="100%" Height="200"/>
 
-        <!-- Article Image -->
-        <asp:Label ID="ArticleImage" runat="server" CssClass="article_form_label"
-            Text="Image:" />
-        <asp:FileUpload ID="FileUpload" runat="server" />
+            <!-- Article External URL -->
+            <asp:Label ID="ArticleExtUrl" runat="server" CssClass="article_form_label"
+                Text="External URL:" />
+            <asp:TextBox ID="ArticleExtUrlTextBox" runat="server" CssClass="article_form_textbox" Width="100%"/>
+            <!-- 
+            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="You must provide either text or an external URL" ValidateEmptyText="true"
+                ControlToValidate="ArticleExtUrlTextBox" OnServerValidate="CustomValidator1_ServerValidate"/>
+                -->
+            <asp:Label ID="TextOrExtLabel" runat="server" Text="You must provide either text or an external URL" Visible="false"/>
 
-        <!-- Submit Button -->
-        <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="Add_Article" CssClass="article_form_button"/>
+            <!-- Article Image -->
+            <asp:Label ID="ArticleImage" runat="server" CssClass="article_form_label"
+                Text="Image:" />
+            <asp:FileUpload ID="FileUpload" runat="server" />
 
-        <asp:Label ID="ErrorLabel" runat="server" Visible="false" />
+            <!-- Submit Button -->
+            <asp:Button ID="SubmitButton" runat="server" Text="Submit" OnClick="Add_Article" CssClass="article_form_button"/>
 
-    </div>
+            <asp:Label ID="ErrorLabel" runat="server" Visible="false" />
+
+        </div>
+
+    </asp:Panel>
 
 </asp:Content>
 
