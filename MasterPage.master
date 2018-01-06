@@ -28,8 +28,10 @@
 
                 <div class="header_right">
                     <asp:Button ID="SignOutButton" runat="server" Text="Sign out" OnClick="SignButton_Click" CssClass="sign_button" Visible="false" CausesValidation="false"/>
+                    <asp:HyperLink ID="RegisterLink" runat="server" Text="Register" CssClass="register_link" NavigateUrl="Register.aspx"/>
                     <asp:HyperLink ID="LogonLink" runat="server" Text="Log in" CssClass="login_link"/>
-                    <asp:HyperLink ID="LoggedUserLink" runat="server" Text="Not logged in" CssClass="logged_user_link"/>
+                    <asp:HyperLink ID="LoggedUserLink" runat="server" Text="Not logged in" CssClass="logged_user_link" Visible="false"/>
+                    <asp:HyperLink ID="UsersLink" runat="server" Text="Users" CssClass="users_link" Visible="false" NavigateUrl="Users.aspx"/>
                 </div>
                 
             </div>

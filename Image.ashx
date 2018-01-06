@@ -11,13 +11,26 @@ public class Image : IHttpHandler {
 
     public void ProcessRequest (HttpContext context) {
         Int32 empno;
-        if (context.Request.QueryString["id"] != null)
-            empno = Convert.ToInt32(context.Request.QueryString["id"]);
+        string article_id = context.Request.QueryString["article_id"];
+        string user_id = context.Request.QueryString["user_id"];
+        string selectCommand = "SELECT thumbnail FROM ARTICLE WHERE id = @id";
+        if (article_id != null)
+        {
+            empno = Convert.ToInt32(article_id);
+            selectCommand = "SELECT thumbnail FROM ARTICLE WHERE id = @id";
+        }
+        else if (user_id != null)
+        {
+            empno = Convert.ToInt32(user_id);
+            selectCommand = "SELECT image FROM USER WHERE id = @id";
+        }
         else
-            throw new ArgumentException("No parameter specified");
+        {
+            return;
+        }
 
         context.Response.ContentType = "image/jpeg";
-        Stream strm = ShowEmpImage(empno);
+        Stream strm = ShowEmpImage(empno, selectCommand);
         byte[] buffer = new byte[4096];
         int byteSeq = 0;
         try
@@ -25,7 +38,7 @@ public class Image : IHttpHandler {
             byteSeq = strm.Read(buffer, 0, 4096);
         } catch (Exception exception)
         {
-                Console.WriteLine(exception.ToString());
+            Console.WriteLine(exception.ToString());
         }
 
         while (byteSeq > 0)
@@ -36,14 +49,13 @@ public class Image : IHttpHandler {
         //context.Response.BinaryWrite(buffer);
     }
 
-    public Stream ShowEmpImage(int empno)
+    public Stream ShowEmpImage(int empno, string selectCommand)
     {
         string conn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection connection = new SqlConnection(conn);
-        string sql = "SELECT thumbnail FROM ARTICLE WHERE id = @ID";
-        SqlCommand cmd = new SqlCommand(sql,connection);
+        SqlCommand cmd = new SqlCommand(selectCommand,connection);
         cmd.CommandType = CommandType.Text;
-        cmd.Parameters.AddWithValue("@ID", empno);
+        cmd.Parameters.AddWithValue("@id", empno);
         connection.Open();
         object img = cmd.ExecuteScalar();
         try

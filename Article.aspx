@@ -24,7 +24,7 @@
                     <asp:Label ID="ScoreLabel" runat="server" Text="100" CssClass="vote_item"></asp:Label>
                 </div>
 
-                <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
+                <asp:Image ID="ArticleImage" runat="server" CssClass="article_content_image" ImageUrl='<%# "Image.ashx?article_id=" + Eval("id")%>'/>
 
                 <div class="article_content_header">
                     <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
@@ -46,22 +46,24 @@
 
             <asp:Label ID="Label1" runat="server" Text="Comments" CssClass="comment_section_title"></asp:Label>
 
-            <div class="comment">    
-                <!-- Comment Image -->    
-                <asp:Image ID="PostCommentImage" runat="server" CssClass="comment_image" ImageUrl="~/images/default_user_image.png"/>
+            <asp:Panel ID="Panel1" runat="server" DefaultButton="PostCommentButton">
+                <div class="comment">    
+                    <!-- Comment Image -->    
+                    <asp:Image ID="PostCommentImage" runat="server" CssClass="comment_image" ImageUrl="~/images/default_user_image.png"/>
                 
-                <div class="comment_content">
-                    <!-- Comment Header -->
-                    <div class="comment_header">
-                        <asp:Label ID="LoggedUserLabel" runat="server" Text="Not logged in" CssClass="comment_header_item"></asp:Label>
-                    </div>
+                    <div class="comment_content">
+                        <!-- Comment Header -->
+                        <div class="comment_header">
+                            <asp:Label ID="LoggedUserLabel" runat="server" Text="Not logged in" CssClass="comment_header_item"></asp:Label>
+                        </div>
 
-                    <!-- Comment Text Box -->
-                    <asp:TextBox ID="PostCommentTextBox" runat="server" CssClass="comment_text"></asp:TextBox>
-                    <asp:Button ID="PostCommentButton" runat="server" Text="Post" CssClass="post_comment_button" OnClick="PostCommentButton_Click"/>
-                    <asp:RequiredFieldValidator ID="ReqCommentValidator" runat="server" ErrorMessage="Comment cannot be empty" ControlToValidate="PostCommentTextBox" CssClass="req_field_validator"/>
+                        <!-- Comment Text Box -->
+                        <asp:TextBox ID="PostCommentTextBox" runat="server" CssClass="comment_text"></asp:TextBox>
+                        <asp:Button ID="PostCommentButton" runat="server" Text="Post" CssClass="post_comment_button" OnClick="PostCommentButton_Click"/>
+                        <asp:RequiredFieldValidator ID="ReqCommentValidator" runat="server" ErrorMessage="Comment cannot be empty" ControlToValidate="PostCommentTextBox" CssClass="req_field_validator"/>
+                    </div>
                 </div>
-            </div>
+            </asp:Panel>
 
 
             <asp:SqlDataSource ID="SqlDataSourceComments" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>

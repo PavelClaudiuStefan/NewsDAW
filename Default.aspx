@@ -17,14 +17,14 @@
           <div class="article">
             <asp:HiddenField ID="ArticleIdHiddenField" runat="server" Value='<%# Eval("id")%>'/>
             <asp:HiddenField ID="ThumbnailHiddenField" runat="server" Value='<%# Eval("thumbnail")%>'/>
-            <asp:Image ID="ArticleImage" runat="server" CssClass="article_image" ImageUrl='<%# "Image.ashx?id=" + Eval("id")%>'/>
+            <asp:Image ID="ArticleImage" runat="server" CssClass="article_image" ImageUrl='<%# "Image.ashx?article_id=" + Eval("id")%>'/>
             <asp:HyperLink ID="ArticleHyperLink" runat="server" CssClass="article_title" Target="_blank"
                  Text='<%# Eval("title") %>' NavigateUrl='<%# Eval("ext_url")%>'/>
-            <asp:Label runat="server" ID="UserLabel" CssClass="article_sub_element"
+            <asp:Label runat="server" ID="UserLabel" CssClass="article_sub_element_link"
                  Text='<%# Eval("user_id") %>' />
             <asp:Label runat="server" ID="DateLabel" CssClass="article_sub_element"
                  Text='<%# Eval("date_created") %>' />
-            <asp:Label runat="server" ID="CategoryLabel" CssClass="article_sub_element"
+            <asp:Label runat="server" ID="CategoryLabel" CssClass="article_sub_element_link"
                  Text='<%# Eval("category_id") %>' />
             <asp:Label runat="server" ID="ScoreLabel" CssClass="article_sub_element"
                  Text="999 points" />

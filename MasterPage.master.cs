@@ -24,10 +24,14 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 {
                     AddArticleLink.Visible = true;
                     AddCategoryLink.Visible = true;
+                    UsersLink.Visible = true;
                 }
                 LoggedUserLink.Text = loggedUser;
+                LoggedUserLink.Visible = true;
+                LoggedUserLink.NavigateUrl = "User.aspx?username=" + loggedUser;
                 SignOutButton.Visible = true;
                 LogonLink.Visible = false;
+                RegisterLink.Visible = false;
             }
             else
             {
