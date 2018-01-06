@@ -13,7 +13,7 @@ public class Image : IHttpHandler {
         Int32 empno;
         string article_id = context.Request.QueryString["article_id"];
         string user_id = context.Request.QueryString["user_id"];
-        string selectCommand = "SELECT thumbnail FROM ARTICLE WHERE id = @id";
+        string selectCommand = "";
         if (article_id != null)
         {
             empno = Convert.ToInt32(article_id);
@@ -22,7 +22,7 @@ public class Image : IHttpHandler {
         else if (user_id != null)
         {
             empno = Convert.ToInt32(user_id);
-            selectCommand = "SELECT image FROM USER WHERE id = @id";
+            selectCommand = "SELECT image FROM [USER] WHERE id = @id";
         }
         else
         {

@@ -20,8 +20,8 @@
 
                 <div class="user_profile">
                     <div class="user_profile_left">
-                        <!--ImageUrl='<%# "Image.ashx?user_id=" + Eval("id")%>'-->
-                        <asp:Image ID="UserImage" runat="server" CssClass="user_profile_image" ImageUrl="~/images/default_user_image.png"/>
+                        <asp:Image ID="UserImage" runat="server" CssClass="user_profile_image" ImageUrl='<%# "Image.ashx?user_id=" + Eval("id")%>'/>
+                        <asp:Image ID="DefaultImage" runat="server" CssClass="user_profile_image" ImageUrl="~/images/default_user_image.png" Visible="false"/>
 
                         <div class="user_profile_username">
                             <asp:Label ID="Label1" runat="server" Text="Username:" />

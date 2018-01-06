@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Web.Security;
 using System.Web.UI.WebControls;
 
 public partial class User : System.Web.UI.Page
@@ -50,6 +49,17 @@ public partial class User : System.Web.UI.Page
     {
         foreach (RepeaterItem repeaterItem in RepeaterUser.Items)
         {
+            //Hide images if ImageUrl is null
+            HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
+            if (thumbnailData.Value == "")
+            {
+                var userImage = repeaterItem.FindControl("UserImage");
+                userImage.Visible = false;
+
+                var defaultImage = repeaterItem.FindControl("DefaultImage");
+                defaultImage.Visible = true;
+            }
+
             Label roleLabel = (Label)repeaterItem.FindControl("RoleLabel");
             string role = roleLabel.Text;
 

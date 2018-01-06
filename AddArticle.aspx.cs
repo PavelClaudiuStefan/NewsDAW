@@ -55,7 +55,7 @@ public partial class Default2 : System.Web.UI.Page
             string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connStr))
             {
-                int userId = 1;
+                string userId = getUserId(username);
                 string title = ArticleTitleTextBox.Text;
                 string categoryId = DropDownList.SelectedValue;
                 string description = ArticleDescriptionTextBox.Text;
@@ -82,5 +82,36 @@ public partial class Default2 : System.Web.UI.Page
             }
             Response.Redirect("Default.aspx");
         }
+    }
+
+    private string getUserId(string username)
+    {
+        string userId = "0";
+        string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        using (SqlConnection connection = new SqlConnection(connStr))
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT id FROM [USER] WHERE username = @username", connection))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int columnIndex = reader.GetOrdinal("id");
+                            int roleInt = reader.GetInt32(columnIndex);
+                            userId = roleInt.ToString();
+                        }
+                    }
+                }
+                catch (SqlException sqlException)
+                {
+                    System.Diagnostics.Debug.Write(sqlException.ToString());
+                }
+            }
+        }
+        return userId;
     }
 }
