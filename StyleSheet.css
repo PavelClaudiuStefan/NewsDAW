@@ -642,3 +642,28 @@ header {
 .link:hover {
     text-decoration: underline;
 }
+
+
+/* Delete page */
+.delete_container {
+    box-shadow: rgba(0,0,0,0.4) 10px 10px 10px;
+    background-color: #e9e9e9;
+    margin: 64px auto;
+    border: 1px solid black;
+    padding: 32px;
+    text-align: center;
+    width: 50%;
+}
+
+.delete_label {
+    display: block;
+}
+
+.buttons {
+    display: block;
+}
+
+.delete_button {
+    margin: 8px;
+    display: inline-block;
+}

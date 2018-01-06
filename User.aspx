@@ -76,6 +76,8 @@
                  Text='<%# Eval("date_created") %>' />
             <asp:Label runat="server" ID="ScoreLabel" CssClass="article_sub_element"
                  Text="999 points" />
+            <asp:HyperLink ID="DeleteLink" runat="server" NavigateUrl='<%# "Delete.aspx?article_id=" + Eval("id") %>'
+                        Text="Delete" CssClass="article_sub_element_link" Visible="false"/>
             <asp:Label runat="server" ID="DescriptionLabel" CssClass="article_description"
                  Text='<%# Eval("short_description") %>' />
           </div>

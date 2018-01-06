@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Web;
 using System.Web.UI.WebControls;
 
 public partial class User : System.Web.UI.Page
@@ -12,7 +13,7 @@ public partial class User : System.Web.UI.Page
         SqlUserSource.DataBind();
 
         string userId = getuserId(username);
-        SqlArticleSource.SelectCommand = "SELECT * FROM [ARTICLE] where user_id = " + userId;
+        SqlArticleSource.SelectCommand = "SELECT * FROM [ARTICLE] where user_id = " + userId + " ORDER BY date_created DESC";
         SqlArticleSource.DataBind();
     }
 
@@ -123,6 +124,14 @@ public partial class User : System.Web.UI.Page
             {
                 var thumbnail = repeaterItem.FindControl("ArticleImage");
                 thumbnail.Visible = false;
+            }
+
+            //Show delete
+            string loggedUser = HttpContext.Current.User.Identity.Name;
+            if (loggedUser == username)
+            {
+                HyperLink deleteButton = (HyperLink)repeaterItem.FindControl("DeleteLink");
+                deleteButton.Visible = true;
             }
         }
     }
