@@ -43,13 +43,15 @@ public partial class Article : System.Web.UI.Page
             foreach (RepeaterItem repeaterItem in RepeaterArticle.Items)
             {
 
-                //Change user ID to username
-                Label userLabel = (Label)repeaterItem.FindControl("UserLabel");
+                //Change user ID to username and add link to profile page
+                HyperLink userLabel = (HyperLink)repeaterItem.FindControl("UserLabel");
                 string userId = userLabel.Text;
-                userLabel.Text = getUsername(userId);
+                string username = getUsername(userId);
+                userLabel.Text = username;
+                userLabel.NavigateUrl = "User.aspx?username=" + username;
 
                 //Change category ID to category title
-                Label categoryLabel = (Label)repeaterItem.FindControl("CategoryLabel");
+                HyperLink categoryLabel = (HyperLink)repeaterItem.FindControl("CategoryLabel");
                 string categoryId = categoryLabel.Text;
                 categoryLabel.Text = getCategoryTitle(categoryId);
 

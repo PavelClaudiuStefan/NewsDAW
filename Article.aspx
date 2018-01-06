@@ -29,12 +29,12 @@
                 <div class="article_content_header">
                     <asp:Label runat="server" ID="TitleLabel" CssClass="article_content_title"
                          Text='<%# Eval("title") %>' />
-                    <asp:Label runat="server" ID="UserLabel" CssClass="article_content_user"
-                         Text='<%# Eval("user_id") %>' />
-                    <asp:Label runat="server" ID="DateLabel" CssClass="article_content_date"
+                    <asp:HyperLink runat="server" ID="UserLabel" CssClass="article_sub_element_link"
+                         Text='<%# Eval("user_id") %>'/>
+                    <asp:Label runat="server" ID="DateLabel" CssClass="article_sub_element"
                          Text='<%# Eval("date_created") %>' />
-                    <asp:Label runat="server" ID="CategoryLabel" CssClass="article_content_category"
-                         Text='<%# Eval("category_id") %>' />
+                    <asp:HyperLink runat="server" ID="CategoryLabel" CssClass="article_sub_element_link"
+                         Text='<%# Eval("category_id") %>' NavigateUrl='<%# "Articles.aspx?category_id=" + Eval("category_id") %>'/>
                 </div>
 
                 <asp:Label runat="server" ID="ContentLabel" CssClass="article_content_text"

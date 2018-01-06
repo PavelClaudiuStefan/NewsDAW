@@ -57,9 +57,11 @@ public partial class Default2 : System.Web.UI.Page
             }
 
             //Change user ID to username
-            Label userLabel = (Label)repeaterItem.FindControl("UserLabel");
+            HyperLink userLabel = (HyperLink)repeaterItem.FindControl("UserLabel");
             string userId = userLabel.Text;
-            userLabel.Text = getUsername(userId);
+            string username = getUsername(userId);
+            userLabel.Text = username;
+            userLabel.NavigateUrl = "User.aspx?username=" + username;
 
             //Hide images if ImageUrl is null
             HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
