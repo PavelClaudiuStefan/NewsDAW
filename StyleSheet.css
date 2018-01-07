@@ -357,8 +357,12 @@ header {
     display: block;
 }
 
-.article_form_button {
+.form_buttons {
     display: block;
+}
+
+.article_form_button {
+    display: inline-block;
     margin-top: 16px;
 }
 

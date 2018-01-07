@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <asp:HyperLink ID="EditUserLink" runat="server" Text="Edit profile" NavigateUrl="EditUser.aspx" CssClass="link"/>
+                    <asp:HyperLink ID="EditUserLink" runat="server" Text="Edit profile" NavigateUrl="EditUser.aspx" CssClass="link" Visible="false"/>
 
                 </div>
             </ItemTemplate>
@@ -76,6 +76,8 @@
                  Text='<%# Eval("date_created") %>' />
             <asp:Label runat="server" ID="ScoreLabel" CssClass="article_sub_element"
                  Text="999 points" />
+            <asp:HyperLink ID="EditLink" runat="server" NavigateUrl='<%# "EditArticle.aspx?article_id=" + Eval("id") %>'
+                        Text="Edit" CssClass="article_sub_element_link" Visible="false"/>
             <asp:HyperLink ID="DeleteLink" runat="server" NavigateUrl='<%# "Delete.aspx?article_id=" + Eval("id") %>'
                         Text="Delete" CssClass="article_sub_element_link" Visible="false"/>
             <asp:Label runat="server" ID="DescriptionLabel" CssClass="article_description"

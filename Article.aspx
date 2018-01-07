@@ -35,6 +35,10 @@
                          Text='<%# Eval("date_created") %>' />
                     <asp:HyperLink runat="server" ID="CategoryLabel" CssClass="article_sub_element_link"
                          Text='<%# Eval("category_id") %>' NavigateUrl='<%# "Articles.aspx?category_id=" + Eval("category_id") %>'/>
+                    <asp:HyperLink ID="EditLink" runat="server" NavigateUrl='<%# "EditArticle.aspx?article_id=" + Eval("id") %>'
+                        Text="Edit" CssClass="article_sub_element_link" Visible="false"/>
+                    <asp:HyperLink ID="DeleteLink" runat="server" NavigateUrl='<%# "Delete.aspx?article_id=" + Eval("id") %>'
+                        Text="Delete" CssClass="article_sub_element_link" Visible="false"/>
                 </div>
 
                 <asp:Label runat="server" ID="ContentLabel" CssClass="article_content_text"

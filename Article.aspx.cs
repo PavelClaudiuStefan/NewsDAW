@@ -84,6 +84,17 @@ public partial class Article : System.Web.UI.Page
                     ImageButton upvoteArrow = (ImageButton)repeaterItem.FindControl("ImageButton1");
                     upvoteArrow.ImageUrl = "~/images/upvote_selected.png";
                 }
+
+                //Show edit and delete if user is valid
+                string loggedUser = HttpContext.Current.User.Identity.Name;
+                if (loggedUser == username)
+                {
+                    HyperLink deleteLink = (HyperLink)repeaterItem.FindControl("DeleteLink");
+                    deleteLink.Visible = true;
+
+                    HyperLink editLink = (HyperLink)repeaterItem.FindControl("EditLink");
+                    editLink.Visible = true;
+                }
             }
         }
     }

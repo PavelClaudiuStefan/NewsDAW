@@ -38,6 +38,7 @@ public partial class Delete : System.Web.UI.Page
 
     protected void NoButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Default.aspx");
+        string articleId = Request.Params["article_id"];
+        Response.Redirect("Article.aspx?id=" + articleId);
     }
 }

@@ -50,10 +50,16 @@ public partial class User : System.Web.UI.Page
     {
         foreach (RepeaterItem repeaterItem in RepeaterUser.Items)
         {
-            //Set link to edit user profile
             string username = Request.Params["username"];
-            HyperLink editUserLink = (HyperLink)repeaterItem.FindControl("EditUserLink");
-            editUserLink.NavigateUrl = "EditUser.aspx?username=" + username;
+            string loggedUser = HttpContext.Current.User.Identity.Name;
+
+            //Set link to edit user profile
+            if (username == loggedUser)
+            {
+                HyperLink editUserLink = (HyperLink)repeaterItem.FindControl("EditUserLink");
+                editUserLink.NavigateUrl = "EditUser.aspx?username=" + username;
+                editUserLink.Visible = true;
+            }
 
             //Hide images if ImageUrl is null
             HiddenField thumbnailData = (HiddenField)repeaterItem.FindControl("ThumbnailHiddenField");
@@ -126,12 +132,15 @@ public partial class User : System.Web.UI.Page
                 thumbnail.Visible = false;
             }
 
-            //Show delete
+            //Show edit and delete if user is valid
             string loggedUser = HttpContext.Current.User.Identity.Name;
             if (loggedUser == username)
             {
-                HyperLink deleteButton = (HyperLink)repeaterItem.FindControl("DeleteLink");
-                deleteButton.Visible = true;
+                HyperLink deleteLink = (HyperLink)repeaterItem.FindControl("DeleteLink");
+                deleteLink.Visible = true;
+
+                HyperLink editLink = (HyperLink)repeaterItem.FindControl("EditLink");
+                editLink.Visible = true;
             }
         }
     }
