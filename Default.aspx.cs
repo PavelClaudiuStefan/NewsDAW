@@ -81,7 +81,7 @@ public partial class _Default : System.Web.UI.Page
                 }
                 catch (SqlException sqlException)
                 {
-                    username = sqlException.ToString();
+                    System.Diagnostics.Debug.WriteLine(sqlException.ToString());
                 }
             }
         }

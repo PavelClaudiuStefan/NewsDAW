@@ -61,11 +61,11 @@ public partial class EditArticle : System.Web.UI.Page
 
             if( bytes.Length == 0)
             {
-                selectCommand = "UPDATE ARTICLE SET user_id=@user_id, category_id=@category_id, title=@title, text=@text, short_description=@short_description, ext_url=@ext_url";
+                selectCommand = "UPDATE ARTICLE SET user_id=@user_id, category_id=@category_id, title=@title, text=@text, short_description=@short_description, ext_url=@ext_url WHERE id=";
             }
             else
             {
-                selectCommand = "UPDATE ARTICLE SET user_id=@user_id, category_id=@category_id, title=@title, text=@text, short_description=@short_description, ext_url=@ext_url, thumbnail=@thumbnail";
+                selectCommand = "UPDATE ARTICLE SET user_id=@user_id, category_id=@category_id, title=@title, text=@text, short_description=@short_description, ext_url=@ext_url, thumbnail=@thumbnail WHERE id=";
             }
 
             string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
